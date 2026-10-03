@@ -28,7 +28,7 @@
   html {
     scroll-behavior: smooth;
     /* Compensa la altura del header fijo al navegar por anclas */
-    scroll-padding-top: 5rem;
+    scroll-padding-top: 6rem;
   }
 
   body {
@@ -67,4 +67,23 @@
   background-image: linear-gradient(90deg, var(--color-brand-navy), var(--color-brand-orange));
   background-clip: text;
   color: transparent;
+}
+
+/* ───────────────────── Cursor de auto (lo activa components/CursorBreeze.tsx) ─────────────────────
+   Solo se aplica con mouse (no en pantallas táctiles) y si no está activado "reducir movimiento".
+   El número después de la URL es el punto exacto del clic (el parachoques delantero). */
+html.car-cursor,
+html.car-cursor * {
+  cursor: url("/cursors/car-right.svg") 30 17, auto;
+}
+
+html.car-cursor[data-car-dir="left"],
+html.car-cursor[data-car-dir="left"] * {
+  cursor: url("/cursors/car-left.svg") 2 17, auto;
+}
+
+/* En los campos de texto se mantiene el cursor normal para escribir */
+html.car-cursor[data-car-dir] input:not([type="radio"]):not([type="checkbox"]),
+html.car-cursor[data-car-dir] textarea {
+  cursor: text;
 }

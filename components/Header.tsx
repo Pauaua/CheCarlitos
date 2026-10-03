@@ -43,9 +43,9 @@ export function Header() {
         Saltar al contenido
       </a>
 
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <a href="#inicio" className="flex items-center gap-2.5" onClick={close}>
-          <Image src="/logo.png" alt="" width={536} height={465} className="h-11 w-auto" priority />
+          <Image src="/logo.png" alt="" width={536} height={465} className="h-[66px] w-auto" priority />
           <span className="whitespace-nowrap font-display text-xl font-semibold uppercase tracking-wide text-brand-navy">
             {SITE.name}
           </span>

@@ -1,4 +1,5 @@
 import { Business } from "@/components/Business";
+import { CursorBreeze } from "@/components/CursorBreeze";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { Hero } from "@/components/Hero";
@@ -44,6 +45,7 @@ export default function Home() {
       </main>
       <Footer />
       <WhatsAppButton />
+      <CursorBreeze />
     </>
   );
 }
