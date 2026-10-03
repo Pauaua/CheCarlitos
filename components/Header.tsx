@@ -51,7 +51,7 @@ export function Header() {
           </span>
         </a>
 
-        <nav aria-label="Navegación principal" className="hidden items-center gap-1 md:flex">
+        <nav aria-label="Navegación principal" className="hidden items-center gap-1 lg:flex">
           {NAV_LINKS.map((link) => (
             <a
               key={link.href}
@@ -69,7 +69,7 @@ export function Header() {
           </a>
           <button
             type="button"
-            className="inline-flex h-10 w-10 items-center justify-center rounded-full text-brand-navy hover:bg-brand-navy/5 md:hidden"
+            className="inline-flex h-10 w-10 items-center justify-center rounded-full text-brand-navy hover:bg-brand-navy/5 lg:hidden"
             aria-expanded={open}
             aria-controls="menu-movil"
             aria-label={open ? "Cerrar menú" : "Abrir menú"}
@@ -84,7 +84,7 @@ export function Header() {
         <nav
           id="menu-movil"
           aria-label="Navegación móvil"
-          className="border-t border-brand-navy/10 bg-white px-4 pb-6 pt-2 md:hidden"
+          className="border-t border-brand-navy/10 bg-white px-4 pb-6 pt-2 lg:hidden"
         >
           <ul className="flex flex-col">
             {NAV_LINKS.map((link) => (

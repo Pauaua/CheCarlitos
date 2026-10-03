@@ -1,6 +1,7 @@
 import { Mail, MapPin, Phone } from "lucide-react";
 import Image from "next/image";
 import { WhatsAppIcon } from "@/components/WhatsAppButton";
+import { EmailText } from "@/components/ui/EmailText";
 import { FOOTER, NAV_LINKS } from "@/lib/content";
 import { SITE, phoneHref, whatsappUrl } from "@/lib/site";
 
@@ -24,10 +25,10 @@ export function Footer() {
 
         <nav aria-label="Enlaces del pie de página">
           <h2 className="font-sans text-sm font-semibold uppercase tracking-[0.18em] text-white">Enlaces</h2>
-          <ul className="mt-4 space-y-2.5">
+          <ul className="mt-3 space-y-1">
             {NAV_LINKS.map((link) => (
               <li key={link.href}>
-                <a href={link.href} className="transition-colors hover:text-brand-orange-light">
+                <a href={link.href} className="inline-block py-1.5 transition-colors hover:text-brand-orange-light">
                   {link.label}
                 </a>
               </li>
@@ -37,16 +38,18 @@ export function Footer() {
 
         <div>
           <h2 className="font-sans text-sm font-semibold uppercase tracking-[0.18em] text-white">Contacto</h2>
-          <ul className="mt-4 space-y-3">
+          <ul className="mt-3 space-y-1.5">
             <li>
-              <a href={`mailto:${SITE.email}`} className="flex items-center gap-3 break-all transition-colors hover:text-brand-orange-light">
+              <a href={`mailto:${SITE.email}`} className="flex items-center gap-3 py-1 transition-colors hover:text-brand-orange-light">
                 <Mail className="h-5 w-5 shrink-0 text-brand-orange-light" aria-hidden="true" />
-                {SITE.email}
+                <span className="min-w-0">
+                  <EmailText email={SITE.email} />
+                </span>
               </a>
             </li>
             {SITE.phones.map((phone) => (
               <li key={phone}>
-                <a href={phoneHref(phone)} className="flex items-center gap-3 transition-colors hover:text-brand-orange-light">
+                <a href={phoneHref(phone)} className="flex items-center gap-3 py-1 transition-colors hover:text-brand-orange-light">
                   <Phone className="h-5 w-5 shrink-0 text-brand-orange-light" aria-hidden="true" />
                   {phone}
                 </a>
@@ -57,13 +60,13 @@ export function Footer() {
                 href={whatsappUrl()}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-3 transition-colors hover:text-brand-orange-light"
+                className="flex items-center gap-3 py-1 transition-colors hover:text-brand-orange-light"
               >
                 <WhatsAppIcon className="h-5 w-5 shrink-0 text-brand-orange-light" />
                 WhatsApp {SITE.phones[0]}
               </a>
             </li>
-            <li className="flex items-center gap-3">
+            <li className="flex items-center gap-3 py-1">
               <MapPin className="h-5 w-5 shrink-0 text-brand-orange-light" aria-hidden="true" />
               {SITE.serviceArea}
             </li>

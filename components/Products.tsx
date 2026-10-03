@@ -12,12 +12,12 @@ export function Products() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading id="productos-title" {...PRODUCTS_SECTION} />
 
-        <ul className="mt-14 grid gap-6 md:grid-cols-2">
+        <ul className="mt-14 grid gap-6 lg:grid-cols-2">
           {PRODUCTS.map((product, i) => (
             <Reveal as="li" key={product.title} delay={(i % 2) * 0.08}>
               <article className="group flex h-full flex-col rounded-2xl border border-brand-navy/10 bg-white p-7 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-lift sm:p-8">
                 {/* FOTO: aquí se puede agregar una imagen real del producto sobre el ícono */}
-                <div className="flex items-start gap-4">
+                <div className="flex flex-col gap-4 sm:flex-row sm:items-start">
                   <IconBadge icon={product.icon} tone="navy" size="lg" />
                   <div>
                     <h3 className="font-sans text-xl font-semibold tracking-normal">{product.title}</h3>

@@ -22,7 +22,7 @@ export function Hero() {
 
           <h1
             id="hero-title"
-            className="mt-6 text-5xl font-semibold uppercase leading-[1.05] sm:text-6xl lg:text-7xl"
+            className="mt-6 text-[2.75rem] font-semibold uppercase leading-[1.05] sm:text-6xl xl:text-7xl"
           >
             {HERO.title}
           </h1>
@@ -66,7 +66,7 @@ export function Hero() {
  */
 function HeroVisual() {
   return (
-    <div className="relative mx-auto aspect-square w-full max-w-md lg:max-w-none">
+    <div className="relative mx-auto aspect-[4/5] w-full max-w-md sm:aspect-square lg:max-w-none">
       <div className="bg-cold-warm absolute inset-0 rounded-[2.5rem] shadow-lift" />
 
       {/* Patrón sutil de líneas de aire */}
@@ -78,7 +78,7 @@ function HeroVisual() {
 
       {/* Termostato central */}
       <div className="absolute inset-0 flex items-center justify-center">
-        <div className="relative flex h-56 w-56 items-center justify-center rounded-full bg-white/10 backdrop-blur-sm sm:h-64 sm:w-64">
+        <div className="relative flex h-44 w-44 items-center justify-center rounded-full bg-white/10 backdrop-blur-sm sm:h-64 sm:w-64">
           <svg aria-hidden="true" viewBox="0 0 200 200" className="absolute inset-0 h-full w-full -rotate-90">
             <defs>
               <linearGradient id="dial" x1="0" y1="0" x2="1" y2="1">
@@ -90,7 +90,7 @@ function HeroVisual() {
             <circle cx="100" cy="100" r="86" fill="none" stroke="url(#dial)" strokeWidth="10" strokeLinecap="round" strokeDasharray="540" strokeDashoffset="150" />
           </svg>
           <div className="text-center text-white">
-            <p className="font-display text-7xl font-semibold leading-none">22°</p>
+            <p className="font-display text-6xl font-semibold leading-none sm:text-7xl">22°</p>
             <p className="mt-2 text-sm font-medium uppercase tracking-[0.2em] text-white/80">Clima ideal</p>
           </div>
         </div>

@@ -7,6 +7,7 @@ import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { buttonStyles } from "@/components/ui/button";
 import { WhatsAppIcon } from "@/components/WhatsAppButton";
+import { EmailText } from "@/components/ui/EmailText";
 import { QUOTE_SECTION } from "@/lib/content";
 import { QUOTE_PRESET_EVENT, type QuotePreset } from "@/lib/quote-preset";
 import {
@@ -427,8 +428,8 @@ function RadioGroup({
 
 /** Panel lateral con datos de contacto directo. */
 function ContactPanel() {
-  const items: { icon: ReactNode; label: string; value: string; href: string; external?: boolean }[] = [
-    { icon: <Mail className="h-5 w-5" aria-hidden="true" />, label: "Correo", value: SITE.email, href: `mailto:${SITE.email}` },
+  const items: { icon: ReactNode; label: string; value: ReactNode; href: string; external?: boolean }[] = [
+    { icon: <Mail className="h-5 w-5" aria-hidden="true" />, label: "Correo", value: <EmailText email={SITE.email} />, href: `mailto:${SITE.email}` },
     ...SITE.phones.map((phone) => ({
       icon: <Phone className="h-5 w-5" aria-hidden="true" />,
       label: "Teléfono",
@@ -470,7 +471,7 @@ function ContactPanel() {
                 </span>
                 <span className="min-w-0">
                   <span className="block text-xs uppercase tracking-wider text-white/80">{item.label}</span>
-                  <span className="block break-all text-sm font-medium sm:text-base">{item.value}</span>
+                  <span className="block text-sm font-medium sm:text-base">{item.value}</span>
                 </span>
               </a>
             </li>
