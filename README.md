@@ -410,7 +410,7 @@ Es intencional en celulares y tablets (no tienen cursor) y cuando el sistema tie
 
 ## 🤖 Declaración de uso de IA
 
-Este proyecto fue **concebido, dirigido y validado por [Phantasia](https://phantasia.cl)**. En su desarrollo se utilizó un asistente de inteligencia artificial como herramienta de apoyo, siempre bajo su dirección y revisión.
+Este proyecto fue **concebido, dirigido y validado por [Phantasia](https://phantasia.cl)**. En su desarrollo se utilizó **Claude** (asistente de inteligencia artificial de [Anthropic](https://www.anthropic.com)), a través de Claude Code, como herramienta de apoyo, siempre bajo su dirección y revisión.
 
 **Aporte de Phantasia (lo esencial del proyecto)**
 - La idea, el concepto y el objetivo del sitio: conseguir cotizaciones para Che Carlitos.
@@ -420,7 +420,7 @@ Este proyecto fue **concebido, dirigido y validado por [Phantasia](https://phant
 - La infraestructura: la base de datos en Supabase, el servicio de correo en Resend, el despliegue en Vercel, el dominio en NIC Chile y la configuración de credenciales.
 - El contenido real (logo, teléfonos, correo, cobertura, horario), las decisiones finales y la aprobación de cada cambio.
 
-**Aporte del asistente de IA (complemento)**
+**Aporte de Claude (complemento)**
 - **Rapidez de implementación:** escritura del código a partir de las especificaciones de Phantasia, incluido el código repetitivo de componentes, estilos y configuración.
 - **Testeos:** pruebas automatizadas en navegador (13 tamaños de pantalla, de 320 px a 2560 px), validación del formulario, prueba de guardado en la base de datos y de envío de correos, y revisión de contraste y accesibilidad.
 - **Corrección de errores** detectados en esas pruebas, por ejemplo desbordes en celulares, contenido invisible con "reducir movimiento" o áreas táctiles pequeñas.
