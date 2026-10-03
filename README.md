@@ -57,7 +57,7 @@ Sitio web oficial: una landing page rápida, accesible y orientada a conseguir s
 | 📝 **Formulario de cotización** | Validación en el navegador y en el servidor con el mismo schema; se guarda en la base de datos **y** llega por correo, con "Responder" directo al cliente. |
 | 🎯 **Cotizar en un clic** | Cada producto tiene su botón "Cotizar", que lleva al formulario con el servicio ya seleccionado. |
 | 🛡️ **Anti-spam** | Campo trampa (honeypot) invisible y límite de solicitudes por IP. |
-| 💬 **WhatsApp siempre visible** | Botón flotante con mensaje predefinido. |
+| 💬 **WhatsApp siempre visible** | Botón flotante con mensaje predefinido, y una flecha para volver al inicio que aparece al bajar por la página. |
 | 🚗 **Detalles de marca** | Cursor con forma de auto que deja una brisa de aire, más intensa mientras más rápido se mueve, y un brillo de fondo sutil con los colores del logo. |
 | 📱 **100 % responsivo** | Probado de 320 px (celulares pequeños) a 2560 px (monitores 2K). |
 | ♿ **Accesible** | Contraste AA, foco visible, etiquetas en todos los campos, navegación por teclado y respeto por "reducir movimiento". |
