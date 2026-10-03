@@ -296,7 +296,7 @@ flowchart LR
 ├── components/
 │   ├── Header.tsx  Hero.tsx  Services.tsx  Products.tsx  ServiceLines.tsx
 │   ├── Business.tsx  WhyUs.tsx  Process.tsx  QuoteForm.tsx  Footer.tsx
-│   ├── WhatsAppButton.tsx  CursorBreeze.tsx
+│   ├── WhatsAppButton.tsx  BackToTop.tsx  CursorBreeze.tsx
 │   └── ui/                       # Piezas reutilizables (botones, títulos, animación…)
 ├── lib/
 │   ├── content.ts                # ✏️ Todos los textos del sitio

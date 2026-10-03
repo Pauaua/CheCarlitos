@@ -5,7 +5,7 @@ import { HERO } from "@/lib/content";
 
 export function Hero() {
   return (
-    <section id="inicio" aria-labelledby="hero-title" className="relative overflow-hidden pt-32 pb-20 sm:pt-40 lg:pb-28">
+    <section id="inicio" tabIndex={-1} aria-labelledby="hero-title" className="relative overflow-hidden outline-none pt-32 pb-20 sm:pt-40 lg:pb-28">
       {/* Fondo decorativo: halo frío (azul) a la izquierda y cálido (naranjo) a la derecha */}
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10">
         <div className="absolute -left-40 -top-24 h-[28rem] w-[28rem] rounded-full bg-brand-ice blur-3xl" />

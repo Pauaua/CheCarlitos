@@ -1,3 +1,4 @@
+import { BackToTop } from "@/components/BackToTop";
 import { Business } from "@/components/Business";
 import { CursorBreeze } from "@/components/CursorBreeze";
 import { Footer } from "@/components/Footer";
@@ -44,6 +45,7 @@ export default function Home() {
         <QuoteForm />
       </main>
       <Footer />
+      <BackToTop />
       <WhatsAppButton />
       <CursorBreeze />
     </>
