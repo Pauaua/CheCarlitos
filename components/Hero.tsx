@@ -1,4 +1,5 @@
 import { ArrowRight, Flame, Snowflake } from "lucide-react";
+import { HeroSlideshow } from "@/components/HeroSlideshow";
 import { Reveal } from "@/components/ui/Reveal";
 import { buttonStyles } from "@/components/ui/button";
 import { HERO } from "@/lib/content";
@@ -60,13 +61,13 @@ export function Hero() {
 }
 
 /**
- * Visual frío/calor hecho con SVG y degradados.
- * FOTO: aquí se puede reemplazar (o complementar) por una foto real de una instalación,
- * por ejemplo con <Image src="/fotos/hero.jpg" ... /> dentro del mismo contenedor.
+ * Visual del hero: marco con degradado frío → calor, imágenes que van cambiando
+ * (HeroSlideshow) y dos tarjetas flotantes fijas.
+ * FOTO: las imágenes se cambian en lib/content.ts → HERO.slides.
  */
 function HeroVisual() {
   return (
-    <div className="relative mx-auto aspect-[4/5] w-full max-w-md sm:aspect-square lg:max-w-none">
+    <div className="relative mx-auto mb-12 aspect-[4/5] w-full max-w-md sm:aspect-square lg:max-w-none">
       <div className="bg-cold-warm absolute inset-0 rounded-[2.5rem] shadow-lift" />
 
       {/* Patrón sutil de líneas de aire */}
@@ -76,25 +77,8 @@ function HeroVisual() {
         ))}
       </svg>
 
-      {/* Termostato central */}
-      <div className="absolute inset-0 flex items-center justify-center">
-        <div className="relative flex h-44 w-44 items-center justify-center rounded-full bg-white/10 backdrop-blur-sm sm:h-64 sm:w-64">
-          <svg aria-hidden="true" viewBox="0 0 200 200" className="absolute inset-0 h-full w-full -rotate-90">
-            <defs>
-              <linearGradient id="dial" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0" stopColor="#E8F0FA" />
-                <stop offset="1" stopColor="#F08A4B" />
-              </linearGradient>
-            </defs>
-            <circle cx="100" cy="100" r="86" fill="none" stroke="white" strokeOpacity="0.15" strokeWidth="10" />
-            <circle cx="100" cy="100" r="86" fill="none" stroke="url(#dial)" strokeWidth="10" strokeLinecap="round" strokeDasharray="540" strokeDashoffset="150" />
-          </svg>
-          <div className="text-center text-white">
-            <p className="font-display text-6xl font-semibold leading-none sm:text-7xl">22°</p>
-            <p className="mt-2 text-sm font-medium uppercase tracking-[0.2em] text-white/80">Clima ideal</p>
-          </div>
-        </div>
-      </div>
+      {/* Imágenes que van cambiando */}
+      <HeroSlideshow />
 
       {/* Tarjetas flotantes */}
       <div className="absolute left-4 top-6 flex items-center gap-3 rounded-2xl bg-white px-4 py-3 shadow-lift sm:left-6 sm:top-8">

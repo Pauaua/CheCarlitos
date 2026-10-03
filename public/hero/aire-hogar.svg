@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" fill="none">
+  <!-- Ilustración provisoria: equipo split de muro. Reemplazar por una foto real (ver lib/content.ts → HERO.slides) -->
+  <circle cx="200" cy="200" r="150" fill="#fff" opacity=".07"/>
+  <circle cx="200" cy="200" r="105" fill="#fff" opacity=".06"/>
+  <g transform="translate(0 -25)">
+  <!-- Unidad interior -->
+  <rect x="62" y="128" width="276" height="92" rx="24" fill="#fff"/>
+  <path d="M62 188h276v8a24 24 0 0 1-24 24H86a24 24 0 0 1-24-24z" fill="#E8F0FA"/>
+  <rect x="92" y="200" width="216" height="6" rx="3" fill="#1F3A6D" opacity=".3"/>
+  <rect x="92" y="150" width="70" height="7" rx="3.5" fill="#1F3A6D" opacity=".14"/>
+  <rect x="92" y="164" width="44" height="7" rx="3.5" fill="#1F3A6D" opacity=".1"/>
+  <circle cx="306" cy="154" r="5" fill="#F08A4B"/>
+  <!-- Aire frío -->
+  <g stroke="#fff" stroke-width="5" stroke-linecap="round" opacity=".75">
+    <path d="M118 238c14 14-14 28 0 42s-14 28 0 42"/>
+    <path d="M170 238c14 14-14 28 0 42s-14 28 0 42" opacity=".85"/>
+    <path d="M222 238c14 14-14 28 0 42s-14 28 0 42" opacity=".7"/>
+    <path d="M274 238c14 14-14 28 0 42s-14 28 0 42" opacity=".55"/>
+  </g>
+  <!-- Copo de nieve -->
+  <g stroke="#fff" stroke-width="4" stroke-linecap="round" transform="translate(334 240)">
+    <path d="M0-22V22M-19-11 19 11M-19 11 19-11"/>
+    <path d="M-7-16 0-10 7-16M-7 16 0 10 7 16"/>
+  </g>
+</g>
+</svg>

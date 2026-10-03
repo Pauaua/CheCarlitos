@@ -31,6 +31,18 @@ export const NAV_LINKS = [
   { href: "#cotizar", label: "Cotizar" },
 ] as const;
 
+type HeroSlide = { src: string; alt: string; fit?: "cover" | "contain" };
+
+// Imágenes que van cambiando en el hero (cada 5 segundos).
+// FOTO: reemplaza estas ilustraciones por fotos reales. Guarda las fotos en /public/hero/
+// (idealmente cuadradas, de 1200×1200 px, en .jpg o .webp) y cambia aquí la ruta y el texto alternativo.
+// "fit": "cover" llena todo el marco (ideal para fotos); "contain" muestra la imagen completa (ilustraciones).
+const HERO_SLIDES: HeroSlide[] = [
+  { src: "/hero/aire-hogar.svg", fit: "contain", alt: "Equipo de aire acondicionado split instalado en un muro, entregando aire frío" },
+  { src: "/hero/aire-auto.svg", fit: "contain", alt: "Automóvil con el aire acondicionado funcionando" },
+  { src: "/hero/condensadora.svg", fit: "contain", alt: "Unidad exterior (condensadora) de un aire acondicionado" },
+];
+
 export const HERO = {
   eyebrow: "Aire acondicionado y calefacción automotriz",
   title: "Clima perfecto en tu casa, tu empresa y tu vehículo",
@@ -43,6 +55,7 @@ export const HERO = {
     { icon: Building2, label: "Atención a empresas" },
     { icon: Car, label: "Aire automotriz" },
   ],
+  slides: HERO_SLIDES,
 };
 
 type Card = { icon: LucideIcon; title: string; description: string };

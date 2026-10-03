@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" fill="none">
+  <!-- Ilustración provisoria: aire acondicionado automotriz. Reemplazar por una foto real (ver lib/content.ts → HERO.slides) -->
+  <circle cx="200" cy="215" r="150" fill="#fff" opacity=".07"/>
+  <g transform="translate(0 -12)">
+  <!-- Flujo de aire -->
+  <g stroke="#fff" stroke-width="5" stroke-linecap="round" opacity=".6">
+    <path d="M70 152q40-16 80 0t80 0 80 0"/>
+    <path d="M110 122q30-12 60 0t60 0 60 0" opacity=".7"/>
+  </g>
+  </g>
+<g transform="translate(0 -24)">
+  <!-- Auto -->
+  <path d="M52 262c0-15 9-24 24-26l42-6 36-36c8-8 19-13 31-13h74c13 0 24 5 32 14l31 34 27 4c15 2 25 13 25 28v15c0 6-5 11-11 11H63c-6 0-11-5-11-11z" fill="#fff"/>
+  <path d="M138 228l28-28c5-5 12-8 19-8h33v36z" fill="#E8F0FA"/>
+  <path d="M230 192h24c9 0 17 4 23 10l24 26h-71z" fill="#E8F0FA"/>
+  <!-- Aire frío dentro de la cabina -->
+  <g stroke="#6092D6" stroke-width="3" stroke-linecap="round" opacity=".7">
+    <path d="M160 214q10-6 20 0t20 0"/>
+    <path d="M244 210q9-5 18 0t18 0"/>
+  </g>
+  <rect x="68" y="252" width="268" height="6" rx="3" fill="#F08A4B"/>
+  <circle cx="112" cy="290" r="28" fill="#142849" stroke="#fff" stroke-width="7"/>
+  <circle cx="112" cy="290" r="10" fill="#E8F0FA"/>
+  <circle cx="290" cy="290" r="28" fill="#142849" stroke="#fff" stroke-width="7"/>
+  <circle cx="290" cy="290" r="10" fill="#E8F0FA"/>
+  </g>
+<!-- Copo de nieve -->
+  <circle cx="318" cy="112" r="30" fill="#fff" opacity=".16"/>
+  <g stroke="#fff" stroke-width="4" stroke-linecap="round" transform="translate(318 112)">
+    <path d="M0-18V18M-15.5-9 15.5 9M-15.5 9 15.5-9"/>
+    <path d="M-6-13 0-8 6-13M-6 13 0 8 6 13"/>
+  </g>
+</svg>

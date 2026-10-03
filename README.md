@@ -59,6 +59,7 @@ Sitio web oficial: una landing page rápida, accesible y orientada a conseguir s
 | 🎯 **Cotizar en un clic** | Cada producto tiene su botón "Cotizar", que lleva al formulario con el servicio ya seleccionado. |
 | 🛡️ **Anti-spam** | Campo trampa (honeypot) invisible y límite de solicitudes por IP. |
 | 💬 **WhatsApp siempre visible** | Botón flotante con mensaje predefinido, y una flecha para volver al inicio que aparece al bajar por la página. |
+| 🖼️ **Carrusel en el hero** | Tres imágenes (hogar, auto y equipo exterior) que cambian con un fundido suave, con pausa y navegación accesibles. |
 | 🚗 **Detalles de marca** | Cursor con forma de auto que deja una brisa de aire, más intensa mientras más rápido se mueve, y un brillo de fondo sutil con los colores del logo. |
 | 📱 **100 % responsivo** | Probado de 320 px (celulares pequeños) a 2560 px (monitores 2K). |
 | ♿ **Accesible** | Contraste AA, foco visible, etiquetas en todos los campos, navegación por teclado y respeto por "reducir movimiento". |
@@ -227,6 +228,16 @@ Los textos y datos están separados del diseño: **no necesitas tocar los compon
    ```
    Esto regenera `app/icon.png` (favicon) y `app/apple-icon.png` (ícono de iPhone). El header, el footer y la imagen para redes sociales usan el logo automáticamente.
 
+### Imágenes del hero (carrusel)
+
+El hero muestra tres imágenes que cambian cada 5 segundos con un fundido suave. Se pausa al pasar el mouse o con el botón de pausa, y no avanza sola si el usuario tiene activado "reducir movimiento". Por ahora son **ilustraciones provisorias** (split de muro, auto y condensadora). Para usar fotos reales:
+
+1. Guarda las fotos en `public/hero/` (idealmente cuadradas, de 1200×1200 px, en `.jpg` o `.webp`).
+2. En [`lib/content.ts`](lib/content.ts), dentro de `HERO_SLIDES`, cambia `src` por la ruta de la foto y `alt` por una descripción breve.
+3. Usa `fit: "cover"` para que la foto llene el marco (o quita `fit`, que por defecto es `cover`).
+
+Puedes agregar o quitar imágenes de la lista: los puntos de navegación se ajustan solos.
+
 ### Fotos
 
 Busca los comentarios `FOTO:` en `components/`: marcan los lugares pensados para fotos reales (hero, productos, hogar/vehículos). Guarda las imágenes en `public/fotos/` y úsalas con el componente `<Image>` de `next/image`, que las optimiza solo.
@@ -297,7 +308,7 @@ flowchart LR
 ├── components/
 │   ├── Header.tsx  Hero.tsx  Services.tsx  Products.tsx  ServiceLines.tsx
 │   ├── Business.tsx  WhyUs.tsx  Process.tsx  QuoteForm.tsx  Footer.tsx
-│   ├── WhatsAppButton.tsx  BackToTop.tsx  CursorBreeze.tsx
+│   ├── HeroSlideshow.tsx  WhatsAppButton.tsx  BackToTop.tsx  CursorBreeze.tsx
 │   └── ui/                       # Piezas reutilizables (botones, títulos, animación…)
 ├── lib/
 │   ├── content.ts                # ✏️ Todos los textos del sitio
