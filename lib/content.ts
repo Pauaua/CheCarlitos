@@ -5,15 +5,15 @@ import {
   CalendarCheck,
   Car,
   ClipboardList,
-  Clock,
   Droplets,
   Fan,
   Flame,
   House,
   type LucideIcon,
   Package,
-  ShieldCheck,
+  Smile,
   Snowflake,
+  Sparkles,
   Stethoscope,
   Truck,
   Wrench,
@@ -187,30 +187,34 @@ export const BUSINESS = {
 
 export const WHY_US_SECTION = {
   eyebrow: "¿Por qué elegirnos?",
-  title: "Trabajo bien hecho, desde la primera visita",
+  title: "Calidad que se nota, detalles que se cuidan",
+  subtitle:
+    "Hacemos cada trabajo como si fuera para nuestra propia casa, para que tú solo te preocupes de disfrutar el clima ideal.",
 };
 
-// PLACEHOLDER: ajusta estos textos con la información real de la empresa
 export const WHY_US: Card[] = [
   {
     icon: BadgeCheck,
-    title: "Técnicos especializados",
-    description: "Personal con experiencia en climatización domiciliaria y automotriz.",
+    title: "Calidad en cada trabajo",
+    description:
+      "Equipos, repuestos e insumos de calidad, instalados por técnicos especializados para que el resultado dure.",
   },
   {
-    icon: House,
-    title: "Atención a domicilio",
-    description: "Llegamos donde estés: casa, oficina o taller.",
+    icon: Sparkles,
+    title: "Dedicación al detalle",
+    description:
+      "Cuidamos cada etapa: desde la evaluación y la instalación hasta dejar tu espacio limpio y ordenado.",
   },
   {
-    icon: Clock,
-    title: "Respuesta rápida",
-    description: "Respondemos tu solicitud de cotización a la brevedad.",
+    icon: Smile,
+    title: "Disfruta sin preocupaciones",
+    description:
+      "Te entregamos todo funcionando y te explicamos cómo sacarle el máximo provecho. Sin complicaciones.",
   },
   {
-    icon: ShieldCheck,
-    title: "Garantía",
-    description: "Nuestros trabajos y repuestos cuentan con garantía.",
+    icon: Truck,
+    title: "Cobertura en todo Chile",
+    description: "Atendemos en toda la Región Metropolitana y enviamos repuestos a todo Chile.",
   },
 ];
 

@@ -479,8 +479,7 @@ function ContactPanel() {
 
         <p className="mt-8 flex items-center gap-2 text-sm text-white/85">
           <Clock className="h-4 w-4" aria-hidden="true" />
-          {/* PLACEHOLDER: horario de atención */}
-          Lunes a viernes de 9:00 a 18:00 hrs.
+          Horario de atención: {SITE.hours}
         </p>
       </div>
     </aside>

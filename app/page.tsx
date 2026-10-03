@@ -19,7 +19,7 @@ const jsonLd = {
   url: SITE.url,
   email: SITE.email,
   telephone: SITE.phones,
-  areaServed: SITE.serviceArea,
+  areaServed: ["Región Metropolitana", "Chile"],
   description:
     "Aire acondicionado domiciliario y vehicular: venta, instalación, mantención, reparación, carga de gas y repuestos de calefacción automotriz.",
 };

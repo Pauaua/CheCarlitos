@@ -1,5 +1,5 @@
 // Datos de contacto y configuración general del sitio.
-// Los valores marcados como PLACEHOLDER deben reemplazarse (o definirse en .env).
+// Algunos valores se pueden sobrescribir con variables de entorno (ver .env.example).
 
 export const SITE = {
   name: "Che Carlitos",
@@ -12,8 +12,9 @@ export const SITE = {
     process.env.NEXT_PUBLIC_PHONE || "+56 9 7692 5964",
     process.env.NEXT_PUBLIC_PHONE_2 || "+56 9 9802 7948",
   ],
-  // PLACEHOLDER: zona de cobertura
-  serviceArea: "Región Metropolitana y alrededores",
+  // Zona de cobertura y horario de atención
+  serviceArea: "Toda la Región Metropolitana. Envíos a todo Chile.",
+  hours: "09:00 a 18:00 hrs.",
 } as const;
 
 // Número de WhatsApp, solo dígitos y con código de país (se puede sobrescribir con NEXT_PUBLIC_WHATSAPP_NUMBER)
