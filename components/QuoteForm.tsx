@@ -429,7 +429,12 @@ function RadioGroup({
 function ContactPanel() {
   const items: { icon: ReactNode; label: string; value: string; href: string; external?: boolean }[] = [
     { icon: <Mail className="h-5 w-5" aria-hidden="true" />, label: "Correo", value: SITE.email, href: `mailto:${SITE.email}` },
-    { icon: <Phone className="h-5 w-5" aria-hidden="true" />, label: "Teléfono", value: SITE.phone, href: phoneHref() },
+    ...SITE.phones.map((phone) => ({
+      icon: <Phone className="h-5 w-5" aria-hidden="true" />,
+      label: "Teléfono",
+      value: phone,
+      href: phoneHref(phone),
+    })),
     {
       icon: <WhatsAppIcon className="h-5 w-5" />,
       label: "WhatsApp",
@@ -454,7 +459,7 @@ function ContactPanel() {
 
         <ul className="mt-8 space-y-4">
           {items.map((item) => (
-            <li key={item.label}>
+            <li key={item.href}>
               <a
                 href={item.href}
                 {...(item.external && { target: "_blank", rel: "noopener noreferrer" })}

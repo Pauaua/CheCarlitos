@@ -19,6 +19,7 @@ const targets = [
 for (const { file, size, padding } of targets) {
   const inner = Math.round(size * (1 - padding * 2));
   const logo = await sharp(SOURCE)
+    .trim() // quita los bordes transparentes sobrantes
     .resize(inner, inner, { fit: "contain", background: BACKGROUND })
     .toBuffer();
 

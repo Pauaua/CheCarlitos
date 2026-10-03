@@ -58,14 +58,14 @@ npm run db:studio
 ```env
 RESEND_API_KEY=re_xxxxxxxxx
 EMAIL_FROM="Che Carlitos <onboarding@resend.dev>"
-EMAIL_TO=airesacondicionados.cc@hotmail.com
+EMAIL_TO=aireacondicionado.cc@hotmail.com
 ```
 
 ### ⚠️ IMPORTANTE: el remitente de prueba
 
 Con el remitente de prueba **`onboarding@resend.dev`**, Resend **solo permite enviar correos a la dirección con la que se registró la cuenta**. Tienes dos opciones:
 
-- **Opción A (rápida):** crea la cuenta de Resend con **airesacondicionados.cc@hotmail.com**. Así los avisos de cotización llegarán sin problema a ese correo.
+- **Opción A (rápida):** crea la cuenta de Resend con **aireacondicionado.cc@hotmail.com**. Así los avisos de cotización llegarán sin problema a ese correo.
 - **Opción B (recomendada para producción):** verifica un dominio propio en Resend (**Domains → Add Domain**, y agrega los registros DNS que te indique). Luego usa un remitente como:
 
   ```env
@@ -87,7 +87,8 @@ Si `SEND_CLIENT_CONFIRMATION=true`, además se envía un correo de confirmación
 | `EMAIL_TO` | Correo que recibe las cotizaciones |
 | `SEND_CLIENT_CONFIRMATION` | `true` para enviar confirmación al cliente |
 | `NEXT_PUBLIC_WHATSAPP_NUMBER` | Número de WhatsApp, solo dígitos con código de país (ej: `56912345678`) |
-| `NEXT_PUBLIC_PHONE` | Teléfono como se muestra en la página (ej: `+56 9 1234 5678`) |
+| `NEXT_PUBLIC_PHONE` | Teléfono principal (también WhatsApp) como se muestra en la página (ej: `+56 9 1234 5678`) |
+| `NEXT_PUBLIC_PHONE_2` | Segundo teléfono de contacto (solo llamadas) |
 | `NEXT_PUBLIC_SITE_URL` | URL pública del sitio (para SEO y Open Graph) |
 
 ## 6. Desplegar en Vercel

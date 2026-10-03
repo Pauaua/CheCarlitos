@@ -2,7 +2,7 @@ import { Mail, MapPin, Phone } from "lucide-react";
 import Image from "next/image";
 import { WhatsAppIcon } from "@/components/WhatsAppButton";
 import { FOOTER, NAV_LINKS } from "@/lib/content";
-import { SITE, WHATSAPP_NUMBER, phoneHref, whatsappUrl } from "@/lib/site";
+import { SITE, phoneHref, whatsappUrl } from "@/lib/site";
 
 export function Footer() {
   const year = new Date().getFullYear();
@@ -14,7 +14,7 @@ export function Footer() {
       <div className="mx-auto grid max-w-7xl gap-12 px-4 py-16 sm:px-6 md:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1.2fr] lg:px-8">
         <div>
           <a href="#inicio" className="inline-flex items-center gap-3">
-            <Image src="/logo.png" alt="" width={48} height={48} className="h-12 w-12 rounded-xl" />
+            <Image src="/logo.png" alt="" width={536} height={465} className="h-16 w-16 rounded-full bg-white object-contain p-1" />
             <span className="font-display text-2xl font-semibold uppercase tracking-wide text-white">
               {SITE.name}
             </span>
@@ -44,12 +44,14 @@ export function Footer() {
                 {SITE.email}
               </a>
             </li>
-            <li>
-              <a href={phoneHref()} className="flex items-center gap-3 transition-colors hover:text-brand-orange-light">
-                <Phone className="h-5 w-5 shrink-0 text-brand-orange-light" aria-hidden="true" />
-                {SITE.phone}
-              </a>
-            </li>
+            {SITE.phones.map((phone) => (
+              <li key={phone}>
+                <a href={phoneHref(phone)} className="flex items-center gap-3 transition-colors hover:text-brand-orange-light">
+                  <Phone className="h-5 w-5 shrink-0 text-brand-orange-light" aria-hidden="true" />
+                  {phone}
+                </a>
+              </li>
+            ))}
             <li>
               <a
                 href={whatsappUrl()}
@@ -58,7 +60,7 @@ export function Footer() {
                 className="flex items-center gap-3 transition-colors hover:text-brand-orange-light"
               >
                 <WhatsAppIcon className="h-5 w-5 shrink-0 text-brand-orange-light" />
-                WhatsApp +{WHATSAPP_NUMBER}
+                WhatsApp {SITE.phones[0]}
               </a>
             </li>
             <li className="flex items-center gap-3">

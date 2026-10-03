@@ -18,7 +18,7 @@ const jsonLd = {
   name: SITE.name,
   url: SITE.url,
   email: SITE.email,
-  telephone: SITE.phone,
+  telephone: SITE.phones,
   areaServed: SITE.serviceArea,
   description:
     "Aire acondicionado domiciliario y vehicular: venta, instalación, mantención, reparación, carga de gas y repuestos de calefacción automotriz.",

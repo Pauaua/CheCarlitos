@@ -5,15 +5,19 @@ export const SITE = {
   name: "Che Carlitos",
   legalName: "Che Carlitos",
   url: process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000",
-  email: "airesacondicionados.cc@hotmail.com",
-  // PLACEHOLDER: teléfono visible en la página (NEXT_PUBLIC_PHONE)
-  phone: process.env.NEXT_PUBLIC_PHONE || "+56 9 0000 0000",
+  email: "aireacondicionado.cc@hotmail.com",
+  // Teléfonos de contacto visibles en la página (se pueden sobrescribir con NEXT_PUBLIC_PHONE y NEXT_PUBLIC_PHONE_2).
+  // El primero es también el número de WhatsApp.
+  phones: [
+    process.env.NEXT_PUBLIC_PHONE || "+56 9 7692 5964",
+    process.env.NEXT_PUBLIC_PHONE_2 || "+56 9 9802 7948",
+  ],
   // PLACEHOLDER: zona de cobertura
   serviceArea: "Región Metropolitana y alrededores",
 } as const;
 
-// PLACEHOLDER: número de WhatsApp, solo dígitos y con código de país (ej: 56912345678)
-export const WHATSAPP_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "56900000000";
+// Número de WhatsApp, solo dígitos y con código de país (se puede sobrescribir con NEXT_PUBLIC_WHATSAPP_NUMBER)
+export const WHATSAPP_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "56976925964";
 
 export const WHATSAPP_DEFAULT_MESSAGE = "Hola Che Carlitos, quisiera cotizar un servicio.";
 
@@ -21,6 +25,6 @@ export function whatsappUrl(message: string = WHATSAPP_DEFAULT_MESSAGE) {
   return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
 }
 
-export function phoneHref(phone: string = SITE.phone) {
+export function phoneHref(phone: string) {
   return `tel:${phone.replace(/[^\d+]/g, "")}`;
 }

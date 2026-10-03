@@ -26,8 +26,10 @@ export default async function Image() {
           backgroundImage: "linear-gradient(120deg, #1F3A6D 0%, #1F3A6D 40%, #D9622B 90%, #F08A4B 100%)",
         }}
       >
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={logoSrc} width={240} height={240} style={{ borderRadius: 48 }} alt="" />
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "center", width: 300, height: 300, borderRadius: 9999, background: "white" }}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={logoSrc} width={270} height={234} alt="" />
+        </div>
         <div style={{ display: "flex", flexDirection: "column" }}>
           <div style={{ fontSize: 84, fontWeight: 700, textTransform: "uppercase", letterSpacing: 2 }}>
             Che Carlitos
