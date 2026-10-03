@@ -5,7 +5,7 @@ import { SERVICES, SERVICES_SECTION } from "@/lib/content";
 
 export function Services() {
   return (
-    <section id="servicios" aria-labelledby="servicios-title" className="bg-white py-20 sm:py-28">
+    <section id="servicios" aria-labelledby="servicios-title" className="bg-white/55 py-20 sm:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading id="servicios-title" {...SERVICES_SECTION} />
 

@@ -18,6 +18,9 @@ export const SITE = {
 } as const;
 
 // Número de WhatsApp, solo dígitos y con código de país (se puede sobrescribir con NEXT_PUBLIC_WHATSAPP_NUMBER)
+// Créditos del footer (agencia que hizo el sitio)
+export const CREDITS = { name: "Phantasia", url: "https://phantasia.cl" } as const;
+
 export const WHATSAPP_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "56976925964";
 
 export const WHATSAPP_DEFAULT_MESSAGE = "Hola Che Carlitos, quisiera cotizar un servicio.";

@@ -13,7 +13,7 @@ export function ServiceLines() {
   ];
 
   return (
-    <section aria-labelledby="lineas-title" className="bg-white py-20 sm:py-28">
+    <section aria-labelledby="lineas-title" className="bg-white/55 py-20 sm:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading id="lineas-title" {...LINES_SECTION} />
 

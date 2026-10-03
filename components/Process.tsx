@@ -4,7 +4,7 @@ import { PROCESS_SECTION, PROCESS_STEPS } from "@/lib/content";
 
 export function Process() {
   return (
-    <section aria-labelledby="proceso-title" className="bg-white py-20 sm:py-28">
+    <section aria-labelledby="proceso-title" className="bg-white/55 py-20 sm:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading id="proceso-title" {...PROCESS_SECTION} />
 

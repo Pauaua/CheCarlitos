@@ -3,7 +3,7 @@ import Image from "next/image";
 import { WhatsAppIcon } from "@/components/WhatsAppButton";
 import { EmailText } from "@/components/ui/EmailText";
 import { FOOTER, NAV_LINKS } from "@/lib/content";
-import { SITE, phoneHref, whatsappUrl } from "@/lib/site";
+import { CREDITS, SITE, phoneHref, whatsappUrl } from "@/lib/site";
 
 export function Footer() {
   const year = new Date().getFullYear();
@@ -75,8 +75,21 @@ export function Footer() {
       </div>
 
       <div className="border-t border-white/10">
-        <p className="mx-auto max-w-7xl px-4 py-6 text-sm text-white/60 sm:px-6 lg:px-8">
-          © {year} {SITE.legalName}. Todos los derechos reservados.
+        <p className="mx-auto max-w-7xl py-6 pl-4 pr-24 text-sm text-white/60 sm:pl-6 lg:px-8">
+          {year} © Fait avec{" "}
+          <span role="img" aria-label="amor">
+            💜
+          </span>{" "}
+          par{" "}
+          <a
+            href={CREDITS.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-medium text-white underline decoration-white/30 underline-offset-4 transition-colors hover:text-brand-orange-light hover:decoration-brand-orange-light"
+          >
+            {CREDITS.name}
+          </a>
+          . Todos los derechos reservados.
         </p>
       </div>
     </footer>

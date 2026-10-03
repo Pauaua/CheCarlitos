@@ -5,7 +5,7 @@ import { WHY_US, WHY_US_SECTION } from "@/lib/content";
 
 export function WhyUs() {
   return (
-    <section aria-labelledby="por-que-title" className="bg-brand-ice py-20 sm:py-28">
+    <section aria-labelledby="por-que-title" className="bg-brand-ice/60 py-20 sm:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading id="por-que-title" {...WHY_US_SECTION} />
 

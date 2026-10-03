@@ -1,173 +1,419 @@
-# Che Carlitos — Landing page
+<div align="center">
 
-Landing page de **Che Carlitos**: aire acondicionado domiciliario y vehicular, y repuestos especializados para calefacción automotriz. Incluye un formulario de cotización que guarda cada solicitud en una base de datos (Supabase) y la envía por correo (Resend).
+<img src="public/logo.png" alt="Logo de Che Carlitos" width="140" />
 
-**Stack:** Next.js 16 (App Router + TypeScript) · Tailwind CSS 4 · Prisma 7 + PostgreSQL (Supabase) · Resend · Zod · lucide-react · framer-motion
+# Che Carlitos
 
----
+**Aire acondicionado domiciliario y vehicular · Repuestos para calefacción automotriz**
 
-## 1. Puesta en marcha local
+Sitio web oficial: una landing page rápida, accesible y orientada a conseguir solicitudes de cotización.
 
-Requisitos: Node.js 20.9 o superior.
+[![Next.js](https://img.shields.io/badge/Next.js-16-000000?logo=nextdotjs&logoColor=white)](https://nextjs.org)
+[![React](https://img.shields.io/badge/React-19-149ECA?logo=react&logoColor=white)](https://react.dev)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-06B6D4?logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
+[![Prisma](https://img.shields.io/badge/Prisma-7-2D3748?logo=prisma&logoColor=white)](https://www.prisma.io)
+[![Supabase](https://img.shields.io/badge/Supabase-PostgreSQL-3FCF8E?logo=supabase&logoColor=white)](https://supabase.com)
+[![Resend](https://img.shields.io/badge/Resend-correo-000000?logo=resend&logoColor=white)](https://resend.com)
+[![Vercel](https://img.shields.io/badge/Deploy-Vercel-000000?logo=vercel&logoColor=white)](https://vercel.com)
 
-```bash
-npm install          # instala dependencias y genera el cliente de Prisma
-cp .env.example .env # luego completa las variables (ver pasos 2 y 4)
-npx prisma migrate dev --name init   # crea la tabla en Supabase (paso 3)
-npm run dev          # http://localhost:3000
-```
+[Sitio en producción](https://checarlitos.cl) · [Inicio rápido](#-inicio-rápido) · [Cómo editar el contenido](#️-cómo-editar-el-contenido) · [Solución de problemas](#-solución-de-problemas)
 
-> La página se ve completa aunque todavía no configures Supabase ni Resend. Lo único que no va a funcionar es el envío del formulario: mostrará un mensaje de error.
-
-## 2. Crear la base de datos en Supabase
-
-1. Entra a <https://supabase.com>, crea una cuenta y presiona **New project**.
-2. Elige un nombre (ej: `che-carlitos`), una **contraseña de base de datos** (guárdala) y la región más cercana (ej: *South America (São Paulo)*).
-3. Cuando el proyecto esté listo, presiona el botón **Connect** (arriba en el panel) y abre la pestaña **ORMs → Prisma**. Ahí verás dos URLs:
-   - **`DATABASE_URL`** → la conexión con *pooler* en modo transacción, **puerto 6543**, termina en `?pgbouncer=true`. La usa la aplicación.
-   - **`DIRECT_URL`** → la conexión directa / sesión, **puerto 5432**. La usa Prisma para crear las tablas (migraciones).
-4. Cópialas en tu `.env` reemplazando `[YOUR-PASSWORD]` por la contraseña que elegiste:
-
-```env
-DATABASE_URL="postgresql://postgres.xxxx:TU_CLAVE@aws-0-sa-east-1.pooler.supabase.com:6543/postgres?pgbouncer=true"
-DIRECT_URL="postgresql://postgres.xxxx:TU_CLAVE@aws-0-sa-east-1.pooler.supabase.com:5432/postgres"
-```
-
-> Si tu contraseña tiene caracteres especiales (`@`, `#`, `/`, etc.), debes codificarlos en la URL (por ejemplo `@` → `%40`).
-
-## 3. Crear la tabla con Prisma
-
-```bash
-npx prisma migrate dev --name init
-```
-
-Esto crea la tabla `QuoteRequest` en Supabase y guarda la migración en `prisma/migrations/` (súbela al repositorio). Para ver las solicitudes recibidas puedes usar el **Table Editor** de Supabase o:
-
-```bash
-npm run db:studio
-```
-
-> **Nota Prisma 7:** en esta versión las URLs ya no van dentro de `schema.prisma`. `DIRECT_URL` se lee en `prisma.config.ts` (migraciones) y `DATABASE_URL` en `lib/prisma.ts` (la app, a través del adaptador `@prisma/adapter-pg`).
-
-## 4. Configurar Resend (envío de correos)
-
-1. Crea una cuenta en <https://resend.com>.
-2. Ve a **API Keys → Create API Key**, dale permiso *Sending access* y copia la clave (empieza con `re_`).
-3. Pégala en `.env`:
-
-```env
-RESEND_API_KEY=re_xxxxxxxxx
-EMAIL_FROM="Che Carlitos <onboarding@resend.dev>"
-EMAIL_TO=aireacondicionado.cc@hotmail.com
-```
-
-### ⚠️ IMPORTANTE: el remitente de prueba
-
-Con el remitente de prueba **`onboarding@resend.dev`**, Resend **solo permite enviar correos a la dirección con la que se registró la cuenta**. Tienes dos opciones:
-
-- **Opción A (rápida):** crea la cuenta de Resend con **aireacondicionado.cc@hotmail.com**. Así los avisos de cotización llegarán sin problema a ese correo.
-- **Opción B (recomendada para producción):** verifica un dominio propio en Resend (**Domains → Add Domain**, y agrega los registros DNS que te indique). Luego usa un remitente como:
-
-  ```env
-  EMAIL_FROM="Che Carlitos <contacto@midominio.cl>"
-  ```
-
-### Correo de confirmación al cliente (opcional)
-
-Si `SEND_CLIENT_CONFIRMATION=true`, además se envía un correo de confirmación a quien pidió la cotización. **Requiere la opción B** (dominio verificado), porque con `onboarding@resend.dev` no se puede enviar a terceros.
-
-## 5. Variables de entorno
-
-| Variable | Descripción |
-| --- | --- |
-| `DATABASE_URL` | Conexión con pooler de Supabase (puerto 6543, `?pgbouncer=true`) |
-| `DIRECT_URL` | Conexión directa de Supabase (puerto 5432), para migraciones |
-| `RESEND_API_KEY` | API key de Resend |
-| `EMAIL_FROM` | Remitente de los correos |
-| `EMAIL_TO` | Correo que recibe las cotizaciones |
-| `SEND_CLIENT_CONFIRMATION` | `true` para enviar confirmación al cliente |
-| `NEXT_PUBLIC_WHATSAPP_NUMBER` | Número de WhatsApp, solo dígitos con código de país (ej: `56912345678`) |
-| `NEXT_PUBLIC_PHONE` | Teléfono principal (también WhatsApp) como se muestra en la página (ej: `+56 9 1234 5678`) |
-| `NEXT_PUBLIC_PHONE_2` | Segundo teléfono de contacto (solo llamadas) |
-| `NEXT_PUBLIC_SITE_URL` | URL pública del sitio (para SEO y Open Graph) |
-
-## 6. Desplegar en Vercel
-
-1. Sube el proyecto a un repositorio de GitHub (el `.env` **no** se sube; ya está en `.gitignore`).
-2. En <https://vercel.com> presiona **Add New → Project** e importa el repositorio. Vercel detecta Next.js automáticamente.
-3. Antes de presionar **Deploy**, abre **Environment Variables** y agrega **todas** las variables de la tabla anterior con sus valores reales (en `NEXT_PUBLIC_SITE_URL` pon la URL final, ej: `https://checarlitos.cl`).
-4. Presiona **Deploy**. El build ejecuta `prisma generate` automáticamente.
-5. La tabla ya existe porque corriste la migración en el paso 3. Si en el futuro cambias `schema.prisma`, ejecuta `npx prisma migrate dev` localmente y luego `npm run db:deploy` apuntando a producción.
-6. (Opcional) En **Settings → Domains** conecta tu dominio propio.
-
-> Las variables `NEXT_PUBLIC_*` se incrustan al compilar: si las cambias en Vercel, vuelve a desplegar.
+</div>
 
 ---
 
-## Cómo editar la página
+<p align="center">
+  <img src="docs/escritorio.webp" alt="Vista de escritorio del sitio" width="74%" />
+  &nbsp;
+  <img src="docs/celular.webp" alt="Vista en celular del sitio" width="22%" />
+</p>
+
+## 📑 Contenido
+
+- [Qué incluye](#-qué-incluye)
+- [Tecnologías](#-tecnologías)
+- [Inicio rápido](#-inicio-rápido)
+- [Variables de entorno](#-variables-de-entorno)
+- [Base de datos (Supabase + Prisma)](#️-base-de-datos-supabase--prisma)
+- [Correos (Resend)](#️-correos-resend)
+- [Despliegue en Vercel y dominio .cl](#-despliegue-en-vercel-y-dominio-cl)
+- [Cómo editar el contenido](#️-cómo-editar-el-contenido)
+- [Diseño y marca](#-diseño-y-marca)
+- [Cómo funciona el formulario](#-cómo-funciona-el-formulario)
+- [Estructura del proyecto](#️-estructura-del-proyecto)
+- [Calidad: accesibilidad, SEO y rendimiento](#-calidad-accesibilidad-seo-y-rendimiento)
+- [Scripts disponibles](#-scripts-disponibles)
+- [Solución de problemas](#-solución-de-problemas)
+- [Checklist antes de publicar](#-checklist-antes-de-publicar)
+
+---
+
+## ✨ Qué incluye
+
+| | |
+|---|---|
+| 🧭 **Una página, todo claro** | Inicio, Servicios, Productos, Hogar vs. Vehículos, Empresas, ¿Por qué elegirnos?, Proceso en 3 pasos y Cotización, con navegación por anclas. |
+| 📝 **Formulario de cotización** | Validación en el navegador y en el servidor con el mismo schema; se guarda en la base de datos **y** llega por correo, con "Responder" directo al cliente. |
+| 🎯 **Cotizar en un clic** | Cada producto tiene su botón "Cotizar", que lleva al formulario con el servicio ya seleccionado. |
+| 🛡️ **Anti-spam** | Campo trampa (honeypot) invisible y límite de solicitudes por IP. |
+| 💬 **WhatsApp siempre visible** | Botón flotante con mensaje predefinido. |
+| 🚗 **Detalles de marca** | Cursor con forma de auto que deja una brisa de aire, más intensa mientras más rápido se mueve, y un brillo de fondo sutil con los colores del logo. |
+| 📱 **100 % responsivo** | Probado de 320 px (celulares pequeños) a 2560 px (monitores 2K). |
+| ♿ **Accesible** | Contraste AA, foco visible, etiquetas en todos los campos, navegación por teclado y respeto por "reducir movimiento". |
+| 🔎 **SEO listo** | Metadatos en español de Chile, Open Graph con imagen generada, `sitemap.xml`, `robots.txt` y datos estructurados de negocio local. |
+
+<p align="center">
+  <img src="docs/cotizacion.webp" alt="Sección de cotización" width="85%" />
+</p>
+
+## 🧰 Tecnologías
+
+| Área | Herramienta | Para qué se usa |
+|---|---|---|
+| Framework | **Next.js 16** (App Router) + **React 19** + **TypeScript** | Páginas, rutas de API, SEO y optimización de imágenes |
+| Estilos | **Tailwind CSS 4** | Diseño con tokens de marca en `app/globals.css` |
+| Base de datos | **PostgreSQL en Supabase** + **Prisma 7** | Guardar cada solicitud de cotización |
+| Correo | **Resend** | Aviso de nueva cotización (y confirmación opcional al cliente) |
+| Validación | **Zod 4** | Un único schema para el navegador y el servidor |
+| Íconos | **lucide-react** | Íconos livianos y consistentes |
+| Animación | **framer-motion** | Entradas sutiles al hacer scroll |
+| Hosting | **Vercel** | Despliegue automático con cada `git push` |
+
+## 🚀 Inicio rápido
+
+> Requisitos: **Node.js 20.9 o superior** y **npm**.
+
+```bash
+# 1. Clonar e instalar (también genera el cliente de Prisma)
+git clone https://github.com/Pauaua/CheCarlitos.git
+cd CheCarlitos
+npm install
+
+# 2. Configurar variables de entorno
+cp .env.example .env        # luego complétalo (ver la sección siguiente)
+
+# 3. Crear la tabla en la base de datos (solo la primera vez)
+npx prisma migrate deploy
+
+# 4. Levantar el sitio
+npm run dev                 # → http://localhost:3000
+```
+
+> 💡 El sitio se ve completo aunque no hayas configurado Supabase ni Resend; solo el envío del formulario mostrará un error hasta que lo hagas.
+
+## 🔐 Variables de entorno
+
+Todas van en `.env` (local) y en **Vercel → Settings → Environment Variables** (producción). El archivo `.env` **nunca** se sube a GitHub.
+
+| Variable | Obligatoria | Pública | Descripción |
+|---|:---:|:---:|---|
+| `DATABASE_URL` | ✅ | — | Conexión a Supabase **con pooler** (puerto `6543`, termina en `?pgbouncer=true`). La usa el sitio. |
+| `DIRECT_URL` | ✅ | — | Conexión **de sesión** (puerto `5432`). La usa Prisma para crear y modificar tablas. |
+| `RESEND_API_KEY` | ✅ | — | Clave de Resend (empieza con `re_`). |
+| `EMAIL_FROM` | ✅ | — | Remitente. Por defecto `Che Carlitos <onboarding@resend.dev>`. |
+| `EMAIL_TO` | ✅ | — | Correo que recibe las cotizaciones: `aireacondicionado.cc@hotmail.com`. |
+| `SEND_CLIENT_CONFIRMATION` | — | — | `true` para enviar confirmación al cliente (requiere dominio verificado en Resend). |
+| `NEXT_PUBLIC_WHATSAPP_NUMBER` | — | ✔ | Solo dígitos con código de país, ej. `56976925964`. |
+| `NEXT_PUBLIC_PHONE` | — | ✔ | Teléfono principal (también WhatsApp) tal como se muestra, ej. `+56 9 7692 5964`. |
+| `NEXT_PUBLIC_PHONE_2` | — | ✔ | Segundo teléfono (solo llamadas), ej. `+56 9 9802 7948`. |
+| `NEXT_PUBLIC_SITE_URL` | ✅ en producción | ✔ | URL completa **con `https://`**, ej. `https://checarlitos.cl`. |
+
+> [!IMPORTANT]
+> - Las variables `NEXT_PUBLIC_*` son visibles en el navegador. Cuando Vercel muestre la advertencia *"Public prefixes expose values to the browser"*, puedes marcarlas como **Config**, porque no son secretas.
+> - `DATABASE_URL`, `DIRECT_URL` y `RESEND_API_KEY` **sí son secretas**: márcalas como sensibles.
+> - Las variables `NEXT_PUBLIC_*` se incrustan al compilar: si las cambias, **vuelve a desplegar**.
+
+## 🗄️ Base de datos (Supabase + Prisma)
+
+### 1. Obtener las URLs de conexión
+
+1. En [supabase.com](https://supabase.com), abre el proyecto y presiona **Connect** (arriba).
+2. Ve a la pestaña **ORMs → Prisma** y copia `DATABASE_URL` y `DIRECT_URL`.
+3. Reemplaza `[YOUR-PASSWORD]` por la contraseña de la base de datos, sin corchetes. Si la olvidaste: **Project Settings → Database → Reset database password**.
+
+> Si la contraseña tiene caracteres especiales, codifícalos: `@` → `%40`, `#` → `%23`, `/` → `%2F`, `?` → `%3F`, `%` → `%25`.
+
+### 2. Crear o actualizar las tablas
+
+```bash
+npx prisma migrate deploy     # aplica las migraciones existentes (la tabla QuoteRequest)
+```
+
+Si en el futuro modificas `prisma/schema.prisma` (por ejemplo, para agregar un campo):
+
+```bash
+npx prisma migrate dev --name descripcion-del-cambio
+```
+
+…y sube la carpeta `prisma/migrations/` a GitHub.
+
+### 3. Ver las solicitudes recibidas
+
+- En Supabase: **Table Editor → QuoteRequest**.
+- O localmente, con una interfaz visual: `npm run db:studio`.
+
+| Campo | Descripción |
+|---|---|
+| `name`, `email`, `phone` | Datos de contacto |
+| `clientType` | `particular` o `empresa` (+ `companyName` opcional) |
+| `city` | Comuna o ciudad |
+| `service` | Servicio o producto de interés |
+| `category` | `domiciliario` o `vehicular` |
+| `message` | Mensaje libre |
+| `emailSent` | `true` si el correo de aviso se envió correctamente |
+| `createdAt` | Fecha y hora de la solicitud |
+
+> **Nota técnica (Prisma 7):** las URLs ya no se escriben en `schema.prisma`. `DIRECT_URL` se lee en `prisma.config.ts` (migraciones) y `DATABASE_URL` en `lib/prisma.ts` (el sitio, mediante `@prisma/adapter-pg`).
+
+## ✉️ Correos (Resend)
+
+1. Crea una cuenta en [resend.com](https://resend.com) **con el correo `aireacondicionado.cc@hotmail.com`**.
+2. Ve a **API Keys → Create API Key** (permiso *Sending access*) y copia la clave en `RESEND_API_KEY`.
+
+> [!WARNING]
+> Con el remitente de prueba `onboarding@resend.dev`, **Resend solo permite enviar al correo con el que se creó la cuenta.** Si la cuenta se crea con otro correo, las cotizaciones no llegarán (en los logs aparece el error `You can only send testing emails to your own email address`).
+
+**Recomendado a futuro:** verifica tu dominio en Resend (**Domains → Add Domain**) y agrega en Vercel los registros DNS que te indique. Así podrás:
+
+- enviar desde una dirección propia, como `EMAIL_FROM="Che Carlitos <contacto@checarlitos.cl>"`;
+- activar `SEND_CLIENT_CONFIRMATION=true` para que cada cliente reciba un acuse de recibo.
+
+## 🌐 Despliegue en Vercel y dominio .cl
+
+### Despliegue
+
+1. En [vercel.com](https://vercel.com): **Add New → Project** e importa este repositorio.
+2. Agrega todas las [variables de entorno](#-variables-de-entorno).
+3. Presiona **Deploy**. Desde ahí, **cada `git push` a `main` publica automáticamente**.
+
+### Conectar el dominio de NIC Chile
+
+NIC Chile no permite crear registros A o CNAME; solo cambiar los servidores DNS. Por eso se usan los **nameservers de Vercel**:
+
+1. **Primero en Vercel:** **Settings → Domains → Add**, escribe `checarlitos.cl` (y `www.checarlitos.cl`) y elige la opción **Nameservers**.
+2. **Luego en [nic.cl](https://www.nic.cl):** **Mis dominios →** tu dominio **→ modificar servidores DNS**:
+   ```
+   ns1.vercel-dns.com
+   ns2.vercel-dns.com
+   ```
+   (Deja vacíos los campos de IP).
+3. Espera la propagación (de minutos a 24 h). Vercel mostrará **Valid Configuration** y emitirá el certificado HTTPS solo.
+4. Actualiza `NEXT_PUBLIC_SITE_URL=https://checarlitos.cl` y haz **Redeploy**.
+
+> Desde ese momento, los registros DNS del dominio (por ejemplo, los de Resend o de un correo corporativo) se administran en **Vercel → Domains → DNS Records**.
+
+## ✏️ Cómo editar el contenido
+
+Los textos y datos están separados del diseño: **no necesitas tocar los componentes** para cambiar el contenido.
 
 | Quiero cambiar… | Archivo |
-| --- | --- |
-| Textos de servicios, productos, empresas, “por qué elegirnos”, pasos | `lib/content.ts` |
-| Correo, teléfono, WhatsApp, zona de cobertura | `lib/site.ts` (o variables de entorno) |
-| Opciones del formulario y validaciones | `lib/quote-schema.ts` |
-| Plantilla del correo | `lib/email.ts` |
-| Colores y tipografías | `app/globals.css` (bloque `@theme`) y `app/layout.tsx` |
-| Título, descripción y SEO | `app/layout.tsx` |
-| Cada sección visual | `components/` (Header, Hero, Services, Products, ServiceLines, Business, WhyUs, Process, QuoteForm, Footer, WhatsAppButton) |
-
-### Colores de marca
-
-Disponibles como clases de Tailwind (`bg-brand-navy`, `text-brand-orange`, etc.):
-
-| Token | Color | Uso |
-| --- | --- | --- |
-| `brand-navy` | `#1F3A6D` | Títulos, textos fuertes |
-| `brand-navy-dark` | `#142849` | Fondos oscuros, footer |
-| `brand-orange` | `#D9622B` | Acentos, degradados |
-| `brand-orange-light` | `#F08A4B` | Hover, degradados |
-| `brand-orange-dark` | `#C4551F` | Botones y textos naranjos (cumple contraste AA con texto blanco) |
-| `brand-cream` | `#F7F2EA` | Fondo general |
-| `brand-ice` | `#E8F0FA` | Fondos “fríos” |
-| `ink` / `muted` | `#1E2430` / `#5B6472` | Texto neutro / gris |
-
-Además están las utilidades `bg-cold-warm` (degradado azul → naranjo) y `text-cold-warm`.
+|---|---|
+| Títulos y textos de cada sección, servicios, productos, empresas, "¿Por qué elegirnos?" y pasos | [`lib/content.ts`](lib/content.ts) |
+| Correo, teléfonos, WhatsApp, zona de cobertura, horario y créditos del footer | [`lib/site.ts`](lib/site.ts) (o las variables de entorno) |
+| Opciones del formulario, mensajes de error y validaciones | [`lib/quote-schema.ts`](lib/quote-schema.ts) |
+| Diseño del correo que llega con cada cotización | [`lib/email.ts`](lib/email.ts) |
+| Título de la pestaña, descripción y palabras clave para Google | [`app/layout.tsx`](app/layout.tsx) |
+| Colores, tipografías y brillo de fondo | [`app/globals.css`](app/globals.css) |
+| Auto del cursor y brisa | [`public/cursors/`](public/cursors) y [`components/CursorBreeze.tsx`](components/CursorBreeze.tsx) |
 
 ### Logo y favicon
 
-`public/logo.png` es un **logo provisorio**. Reemplázalo por el logo real (ideal: PNG cuadrado de 512×512 o más) y ejecuta:
-
-```bash
-npm run icons
-```
-
-Esto regenera `app/icon.png` y `app/apple-icon.png` (favicon e ícono de iPhone). La imagen para redes sociales (`app/opengraph-image.tsx`) usa el logo automáticamente.
+1. Reemplaza `public/logo.png` (PNG con fondo transparente, idealmente de 512 px o más).
+2. Ejecuta:
+   ```bash
+   npm run icons
+   ```
+   Esto regenera `app/icon.png` (favicon) y `app/apple-icon.png` (ícono de iPhone). El header, el footer y la imagen para redes sociales usan el logo automáticamente.
 
 ### Fotos
 
-Busca los comentarios `FOTO:` en `components/` para ver dónde conviene poner fotos reales (hero, productos, sección hogar/vehículos). Guarda las fotos en `public/fotos/` y usa el componente `<Image>` de `next/image`.
+Busca los comentarios `FOTO:` en `components/`: marcan los lugares pensados para fotos reales (hero, productos, hogar/vehículos). Guarda las imágenes en `public/fotos/` y úsalas con el componente `<Image>` de `next/image`, que las optimiza solo.
 
-## Cómo funciona el formulario
+### Ajustes rápidos de efectos
 
-1. El navegador valida con el schema de Zod (`lib/quote-schema.ts`).
-2. Se envía a `POST /api/cotizacion` (`app/api/cotizacion/route.ts`), que:
-   - aplica un **rate limit** por IP (5 solicitudes cada 10 minutos, en memoria);
-   - descarta en silencio a los bots que completen el **campo trampa** (honeypot);
-   - vuelve a validar con **el mismo schema**;
-   - **guarda** la solicitud en la base de datos;
-   - **envía el correo** a `EMAIL_TO` con `replyTo` = correo del cliente (puedes responderle directo);
-   - si el correo falla, la solicitud queda guardada con `emailSent = false` y el error se registra en la consola (logs de Vercel).
-3. Los botones “Cotizar” de cada producto dejan preseleccionado el servicio en el formulario.
+| Efecto | Dónde | Qué cambiar |
+|---|---|---|
+| Intensidad del brillo de fondo | `app/globals.css` → bloque *Brillo de fondo* | Las opacidades (el valor después de `/`) |
+| Velocidad del destello | `app/globals.css` → `animation: brillo-fondo 32s` | Más segundos = más lento |
+| Color de la brisa | `components/CursorBreeze.tsx` → `COLOR` | Valores RGB |
+| Sensibilidad a la velocidad | `components/CursorBreeze.tsx` → `MAX_SPEED` | Un número menor = brisa intensa con menos velocidad |
+| Tamaño del auto | `public/cursors/car-*.svg` → `width` / `height` | Ajusta también el punto de clic en `globals.css` |
 
-## Scripts
+## 🎨 Diseño y marca
 
-| Comando | Descripción |
-| --- | --- |
-| `npm run dev` | Servidor de desarrollo |
-| `npm run build` | Build de producción (incluye `prisma generate`) |
-| `npm run start` | Servir el build |
-| `npm run lint` | ESLint |
-| `npm run db:migrate` | `prisma migrate dev` |
-| `npm run db:deploy` | `prisma migrate deploy` (producción) |
-| `npm run db:studio` | Explorador visual de la base de datos |
-| `npm run icons` | Regenerar favicon desde `public/logo.png` |
+El concepto visual es el **contraste entre el frío (azul, copo de nieve) y el calor (naranjo, calefacción)** del logo.
+
+| Token | Color | Uso |
+|---|---|---|
+| `brand-navy` | ![#1F3A6D](https://img.shields.io/badge/-%231F3A6D-1F3A6D) | Títulos y textos fuertes |
+| `brand-navy-dark` | ![#142849](https://img.shields.io/badge/-%23142849-142849) | Fondos oscuros y footer |
+| `brand-orange` | ![#D9622B](https://img.shields.io/badge/-%23D9622B-D9622B) | Acentos y degradados |
+| `brand-orange-light` | ![#F08A4B](https://img.shields.io/badge/-%23F08A4B-F08A4B) | Hover y degradados |
+| `brand-orange-dark` | ![#C4551F](https://img.shields.io/badge/-%23C4551F-C4551F) | Botones y textos naranjos (cumple contraste AA) |
+| `brand-cream` | ![#F7F2EA](https://img.shields.io/badge/-%23F7F2EA-F7F2EA) | Fondo general |
+| `brand-ice` | ![#E8F0FA](https://img.shields.io/badge/-%23E8F0FA-E8F0FA) | Fondos "fríos" |
+| `ink` / `muted` | ![#1E2430](https://img.shields.io/badge/-%231E2430-1E2430) ![#5B6472](https://img.shields.io/badge/-%235B6472-5B6472) | Texto principal / secundario |
+
+- **Tipografías:** *Oswald* para títulos (condensada, como la del logo) e *Inter* para el texto, cargadas con `next/font` (sin parpadeos ni peticiones a Google desde el navegador).
+- **Utilidades propias:** `bg-cold-warm` (degradado azul → naranjo) y `text-cold-warm`.
+- Se usan como clases de Tailwind: `bg-brand-navy`, `text-brand-orange-dark`, `border-brand-ice`, etc.
+
+## 📨 Cómo funciona el formulario
+
+```mermaid
+flowchart LR
+    A[Cliente completa<br/>el formulario] --> B{Validación Zod<br/>en el navegador}
+    B -- errores --> A
+    B -- ok --> C[POST /api/cotizacion]
+    C --> D{Límite por IP<br/>y honeypot}
+    D -- bloqueado --> X[Respuesta sin guardar]
+    D -- ok --> E{Validación Zod<br/>en el servidor}
+    E --> F[(Guardar en Supabase)]
+    F --> G[Correo con Resend<br/>a EMAIL_TO]
+    G --> H[emailSent = true]
+    H --> I[✅ Mensaje de agradecimiento]
+```
+
+- **Un solo schema** (`lib/quote-schema.ts`) valida en el navegador y en el servidor, así las reglas nunca se desincronizan.
+- **Nada se pierde:** si el correo falla, la solicitud queda guardada con `emailSent = false`; si falla la base de datos pero el correo sale, el cliente igual ve el mensaje de éxito. Solo si fallan ambos se le pide reintentar o escribir por WhatsApp.
+- **"Responder" va directo al cliente:** el correo se envía con `replyTo` = correo del cliente.
+- **Límite de abuso:** 5 solicitudes cada 10 minutos por IP (en memoria; es una protección básica por instancia).
+- Los errores quedan en los logs con el prefijo `[cotizacion]`.
+
+## 🗂️ Estructura del proyecto
+
+```text
+.
+├── app/
+│   ├── api/cotizacion/route.ts   # Recibe el formulario: valida, guarda y envía el correo
+│   ├── layout.tsx                # Fuentes, metadatos y SEO
+│   ├── page.tsx                  # Arma la página con todas las secciones
+│   ├── globals.css               # Colores de marca, brillo de fondo y cursor
+│   ├── opengraph-image.tsx       # Imagen para compartir en redes (generada)
+│   ├── icon.png, apple-icon.png  # Favicon (generados con `npm run icons`)
+│   └── robots.ts, sitemap.ts     # SEO
+├── components/
+│   ├── Header.tsx  Hero.tsx  Services.tsx  Products.tsx  ServiceLines.tsx
+│   ├── Business.tsx  WhyUs.tsx  Process.tsx  QuoteForm.tsx  Footer.tsx
+│   ├── WhatsAppButton.tsx  CursorBreeze.tsx
+│   └── ui/                       # Piezas reutilizables (botones, títulos, animación…)
+├── lib/
+│   ├── content.ts                # ✏️ Todos los textos del sitio
+│   ├── site.ts                   # ✏️ Datos de contacto y créditos
+│   ├── quote-schema.ts           # Reglas del formulario (Zod)
+│   ├── email.ts                  # Plantillas y envío con Resend
+│   ├── prisma.ts                 # Conexión a la base de datos
+│   └── rate-limit.ts             # Límite de solicitudes por IP
+├── prisma/
+│   ├── schema.prisma             # Modelo QuoteRequest
+│   └── migrations/               # Historial de cambios de la base de datos
+├── public/                       # logo.png, cursores y archivos estáticos
+├── scripts/generate-icons.mjs    # Genera el favicon desde el logo
+├── docs/                         # Capturas usadas en este README
+└── prisma.config.ts              # Configuración de la CLI de Prisma
+```
+
+## ✅ Calidad: accesibilidad, SEO y rendimiento
+
+**Accesibilidad**
+- Contraste de color AA en textos y botones (por eso existe `brand-orange-dark`).
+- Foco visible en todos los elementos interactivos y enlace "Saltar al contenido".
+- Etiquetas en todos los campos, errores asociados a cada campo y foco automático en el primer error.
+- Menú móvil navegable con teclado (se cierra con <kbd>Esc</kbd>).
+- Con "reducir movimiento" activado se eliminan los desplazamientos, el destello de fondo y el cursor animado.
+- Áreas táctiles de al menos 24 px.
+
+**SEO**
+- Título, descripción y palabras clave orientadas a: aire acondicionado, instalación, mantención, carga de gas, aire automotriz y repuestos de calefacción automotriz.
+- Open Graph y Twitter Card con imagen generada a partir del logo.
+- Datos estructurados `HVACBusiness` (Schema.org), `sitemap.xml` y `robots.txt`.
+- Idioma declarado como `es-CL`.
+
+**Rendimiento**
+- Página principal pre-renderizada como estática.
+- Fuentes autoalojadas con `next/font` e imágenes optimizadas con `next/image`.
+- La animación de la brisa solo corre mientras hay brisa visible y no se activa en celulares.
+
+**Probado en:** 320, 360, 375, 390 y 430 px (celulares), 667 px (celular horizontal), 768, 820 y 1024 px (tablets), y 1280, 1440, 1920 y 2560 px (escritorio), sin scroll horizontal ni textos cortados.
+
+## 📜 Scripts disponibles
+
+| Comando | Qué hace |
+|---|---|
+| `npm run dev` | Servidor de desarrollo en `http://localhost:3000` |
+| `npm run build` | Compila para producción (incluye `prisma generate`) |
+| `npm run start` | Sirve la versión compilada |
+| `npm run lint` | Revisa el código con ESLint |
+| `npm run icons` | Regenera el favicon desde `public/logo.png` |
+| `npm run db:migrate` | Crea una migración nueva (`prisma migrate dev`) |
+| `npm run db:deploy` | Aplica las migraciones pendientes (`prisma migrate deploy`) |
+| `npm run db:studio` | Abre un explorador visual de la base de datos |
+
+## 🩺 Solución de problemas
+
+<details>
+<summary><strong>Las cotizaciones se guardan, pero no llega el correo</strong></summary>
+
+- Revisa en Vercel **Logs** las líneas `[cotizacion] Error al enviar el correo`.
+- `You can only send testing emails to your own email address (…)` → la cuenta de Resend se creó con otro correo. Créala con `aireacondicionado.cc@hotmail.com` o verifica un dominio.
+- Revisa la carpeta de **correo no deseado** de Hotmail.
+- Confirma que `RESEND_API_KEY` esté en Vercel y que hiciste **Redeploy** después de agregarla.
+</details>
+
+<details>
+<summary><strong>El formulario muestra "No pudimos registrar tu solicitud"</strong></summary>
+
+Fallaron la base de datos **y** el correo a la vez. Revisa en los logs `[cotizacion] Error al guardar en la base de datos` y verifica `DATABASE_URL` (puerto `6543`, `?pgbouncer=true`) y la contraseña.
+</details>
+
+<details>
+<summary><strong>El despliegue falla con "Invalid URL"</strong></summary>
+
+`NEXT_PUBLIC_SITE_URL` debe incluir el protocolo: `https://checarlitos.cl`, no solo `checarlitos.cl`.
+</details>
+
+<details>
+<summary><strong>Cambié un teléfono o la URL en Vercel y no se actualiza</strong></summary>
+
+Las variables `NEXT_PUBLIC_*` se fijan al compilar. Ve a **Deployments → ⋯ → Redeploy**.
+</details>
+
+<details>
+<summary><strong><code>prisma migrate</code> no conecta</strong></summary>
+
+Las migraciones usan `DIRECT_URL` (puerto `5432`). Verifica la contraseña y que los caracteres especiales estén codificados.
+</details>
+
+<details>
+<summary><strong>"Another next dev server is already running"</strong></summary>
+
+Ya hay un `npm run dev` abierto. Usa ese (la terminal indica la URL) o ciérralo con el comando `taskkill /PID <número> /F` que muestra el mensaje.
+</details>
+
+<details>
+<summary><strong>No veo el cursor de auto</strong></summary>
+
+Es intencional en celulares y tablets (no tienen cursor) y cuando el sistema tiene activado "reducir movimiento". En Chrome, cerca de los bordes de la ventana, el navegador puede mostrar el cursor normal por seguridad.
+</details>
+
+## 📋 Checklist antes de publicar
+
+- [ ] Todas las variables de entorno están en Vercel (las secretas, marcadas como sensibles).
+- [ ] `NEXT_PUBLIC_SITE_URL` tiene el dominio final con `https://`.
+- [ ] La tabla `QuoteRequest` existe en Supabase (`npx prisma migrate deploy`).
+- [ ] Una cotización de prueba llega a `aireacondicionado.cc@hotmail.com`.
+- [ ] El dominio muestra **Valid Configuration** en Vercel.
+- [ ] El favicon y la imagen para redes muestran el logo real.
+- [ ] Textos revisados en `lib/content.ts` y datos de contacto en `lib/site.ts`.
+
+---
+
+<div align="center">
+
+**Che Carlitos** · Toda la Región Metropolitana · Envíos a todo Chile<br/>
+📧 aireacondicionado.cc@hotmail.com · 📞 +56 9 7692 5964 · +56 9 9802 7948
+
+Fait avec 💜 par [Phantasia](https://phantasia.cl) · © Che Carlitos. Todos los derechos reservados.
+
+</div>
