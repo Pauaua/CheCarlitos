@@ -89,7 +89,7 @@ export function Footer() {
           >
             {CREDITS.name}
           </a>
-          . Todos los derechos reservados.
+          . Tous droits réservés.
         </p>
       </div>
     </footer>

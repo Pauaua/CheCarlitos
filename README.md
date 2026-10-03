@@ -414,6 +414,6 @@ Es intencional en celulares y tablets (no tienen cursor) y cuando el sistema tie
 **Che Carlitos** · Toda la Región Metropolitana · Envíos a todo Chile<br/>
 📧 aireacondicionado.cc@hotmail.com · 📞 +56 9 7692 5964 · +56 9 9802 7948
 
-Fait avec 💜 par [Phantasia](https://phantasia.cl) · © Che Carlitos. Todos los derechos reservados.
+Fait avec 💜 par [Phantasia](https://phantasia.cl) · © Che Carlitos. Tous droits réservés.
 
 </div>
