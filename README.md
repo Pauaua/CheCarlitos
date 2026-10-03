@@ -46,6 +46,7 @@ Sitio web oficial: una landing page rápida, accesible y orientada a conseguir s
 - [Scripts disponibles](#-scripts-disponibles)
 - [Solución de problemas](#-solución-de-problemas)
 - [Checklist antes de publicar](#-checklist-antes-de-publicar)
+- [Declaración de uso de IA](#-declaración-de-uso-de-ia)
 
 ---
 
@@ -406,6 +407,26 @@ Es intencional en celulares y tablets (no tienen cursor) y cuando el sistema tie
 - [ ] El dominio muestra **Valid Configuration** en Vercel.
 - [ ] El favicon y la imagen para redes muestran el logo real.
 - [ ] Textos revisados en `lib/content.ts` y datos de contacto en `lib/site.ts`.
+
+## 🤖 Declaración de uso de IA
+
+Este proyecto fue **concebido, dirigido y validado por [Phantasia](https://phantasia.cl)**. En su desarrollo se utilizó un asistente de inteligencia artificial como herramienta de apoyo, siempre bajo su dirección y revisión.
+
+**Aporte de Phantasia (lo esencial del proyecto)**
+- La idea, el concepto y el objetivo del sitio: conseguir cotizaciones para Che Carlitos.
+- La definición de la arquitectura y del stack: Next.js, Tailwind, Prisma, Supabase, Resend y Zod.
+- La especificación de cada sección, el formulario, el modelo de datos y las reglas de negocio.
+- La dirección de arte: la paleta tomada del logo, el concepto frío/calor, la tipografía, el estilo de referencia y los detalles de marca, como el cursor de auto con brisa y el brillo de fondo.
+- La infraestructura: la base de datos en Supabase, el servicio de correo en Resend, el despliegue en Vercel, el dominio en NIC Chile y la configuración de credenciales.
+- El contenido real (logo, teléfonos, correo, cobertura, horario), las decisiones finales y la aprobación de cada cambio.
+
+**Aporte del asistente de IA (complemento)**
+- **Rapidez de implementación:** escritura del código a partir de las especificaciones de Phantasia, incluido el código repetitivo de componentes, estilos y configuración.
+- **Testeos:** pruebas automatizadas en navegador (13 tamaños de pantalla, de 320 px a 2560 px), validación del formulario, prueba de guardado en la base de datos y de envío de correos, y revisión de contraste y accesibilidad.
+- **Corrección de errores** detectados en esas pruebas, por ejemplo desbordes en celulares, contenido invisible con "reducir movimiento" o áreas táctiles pequeñas.
+- **Apoyo en documentación:** redacción de este README y de textos de apoyo propuestos para su revisión.
+
+Todo el contenido generado con IA fue revisado, ajustado y aprobado por Phantasia antes de publicarse.
 
 ---
 
