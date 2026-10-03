@@ -1,0 +1,70 @@
+@import "tailwindcss";
+
+/* ───────────────────────── Paleta de marca (sacada del logo) ─────────────────────────
+   Se usan como clases de Tailwind: bg-brand-navy, text-brand-orange, border-brand-ice, etc. */
+@theme {
+  --color-brand-navy: #1f3a6d;
+  --color-brand-navy-dark: #142849;
+  --color-brand-orange: #d9622b;
+  --color-brand-orange-light: #f08a4b;
+  /* Naranjo accesible: blanco sobre este tono cumple contraste AA (4.5:1). Úsalo en botones y textos. */
+  --color-brand-orange-dark: #c4551f;
+  --color-brand-cream: #f7f2ea;
+  --color-brand-ice: #e8f0fa;
+  --color-ink: #1e2430;
+  --color-muted: #5b6472;
+
+  --shadow-soft: 0 1px 2px rgb(20 40 73 / 0.04), 0 8px 24px -8px rgb(20 40 73 / 0.12);
+  --shadow-lift: 0 2px 4px rgb(20 40 73 / 0.05), 0 20px 40px -12px rgb(20 40 73 / 0.22);
+}
+
+/* Tipografías cargadas con next/font en app/layout.tsx */
+@theme inline {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-oswald), ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    /* Compensa la altura del header fijo al navegar por anclas */
+    scroll-padding-top: 5rem;
+  }
+
+  body {
+    @apply bg-brand-cream text-ink font-sans antialiased;
+  }
+
+  h1,
+  h2,
+  h3 {
+    @apply font-display tracking-tight text-brand-navy;
+  }
+
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-brand-orange;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+}
+
+/* Degradado frío → calor, usado en el hero y en separadores */
+@utility bg-cold-warm {
+  background-image: linear-gradient(
+    120deg,
+    var(--color-brand-navy) 0%,
+    var(--color-brand-navy) 35%,
+    var(--color-brand-orange) 85%,
+    var(--color-brand-orange-light) 100%
+  );
+}
+
+@utility text-cold-warm {
+  background-image: linear-gradient(90deg, var(--color-brand-navy), var(--color-brand-orange));
+  background-clip: text;
+  color: transparent;
+}

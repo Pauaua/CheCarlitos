@@ -1,0 +1,39 @@
+// Esquema de base de datos de Che Carlitos (PostgreSQL en Supabase).
+// - Runtime: DATABASE_URL (pooler, puerto 6543, ?pgbouncer=true) → lib/prisma.ts
+// - Migraciones: DIRECT_URL (conexión directa, puerto 5432) → prisma.config.ts
+
+generator client {
+  provider = "prisma-client"
+  output   = "../lib/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum ClientType {
+  particular
+  empresa
+}
+
+enum Category {
+  domiciliario
+  vehicular
+}
+
+model QuoteRequest {
+  id          String     @id @default(cuid())
+  name        String
+  email       String
+  phone       String
+  clientType  ClientType
+  companyName String?
+  city        String?
+  service     String
+  category    Category
+  message     String?
+  emailSent   Boolean    @default(false)
+  createdAt   DateTime   @default(now())
+
+  @@index([createdAt])
+}

@@ -1,0 +1,79 @@
+import { Mail, MapPin, Phone } from "lucide-react";
+import Image from "next/image";
+import { WhatsAppIcon } from "@/components/WhatsAppButton";
+import { FOOTER, NAV_LINKS } from "@/lib/content";
+import { SITE, WHATSAPP_NUMBER, phoneHref, whatsappUrl } from "@/lib/site";
+
+export function Footer() {
+  const year = new Date().getFullYear();
+
+  return (
+    <footer className="bg-brand-navy-dark text-white/80">
+      <div aria-hidden="true" className="bg-cold-warm h-1" />
+
+      <div className="mx-auto grid max-w-7xl gap-12 px-4 py-16 sm:px-6 md:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1.2fr] lg:px-8">
+        <div>
+          <a href="#inicio" className="inline-flex items-center gap-3">
+            <Image src="/logo.png" alt="" width={48} height={48} className="h-12 w-12 rounded-xl" />
+            <span className="font-display text-2xl font-semibold uppercase tracking-wide text-white">
+              {SITE.name}
+            </span>
+          </a>
+          <p className="mt-4 max-w-sm leading-relaxed">{FOOTER.description}</p>
+        </div>
+
+        <nav aria-label="Enlaces del pie de página">
+          <h2 className="font-sans text-sm font-semibold uppercase tracking-[0.18em] text-white">Enlaces</h2>
+          <ul className="mt-4 space-y-2.5">
+            {NAV_LINKS.map((link) => (
+              <li key={link.href}>
+                <a href={link.href} className="transition-colors hover:text-brand-orange-light">
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        <div>
+          <h2 className="font-sans text-sm font-semibold uppercase tracking-[0.18em] text-white">Contacto</h2>
+          <ul className="mt-4 space-y-3">
+            <li>
+              <a href={`mailto:${SITE.email}`} className="flex items-center gap-3 break-all transition-colors hover:text-brand-orange-light">
+                <Mail className="h-5 w-5 shrink-0 text-brand-orange-light" aria-hidden="true" />
+                {SITE.email}
+              </a>
+            </li>
+            <li>
+              <a href={phoneHref()} className="flex items-center gap-3 transition-colors hover:text-brand-orange-light">
+                <Phone className="h-5 w-5 shrink-0 text-brand-orange-light" aria-hidden="true" />
+                {SITE.phone}
+              </a>
+            </li>
+            <li>
+              <a
+                href={whatsappUrl()}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-3 transition-colors hover:text-brand-orange-light"
+              >
+                <WhatsAppIcon className="h-5 w-5 shrink-0 text-brand-orange-light" />
+                WhatsApp +{WHATSAPP_NUMBER}
+              </a>
+            </li>
+            <li className="flex items-center gap-3">
+              <MapPin className="h-5 w-5 shrink-0 text-brand-orange-light" aria-hidden="true" />
+              {SITE.serviceArea}
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div className="border-t border-white/10">
+        <p className="mx-auto max-w-7xl px-4 py-6 text-sm text-white/60 sm:px-6 lg:px-8">
+          © {year} {SITE.legalName}. Todos los derechos reservados.
+        </p>
+      </div>
+    </footer>
+  );
+}
