@@ -10,6 +10,7 @@ import { QuoteForm } from "@/components/QuoteForm";
 import { ServiceLines } from "@/components/ServiceLines";
 import { Services } from "@/components/Services";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
+import { WelcomeModal } from "@/components/WelcomeModal";
 import { WhyUs } from "@/components/WhyUs";
 import { SITE } from "@/lib/site";
 
@@ -48,6 +49,7 @@ export default function Home() {
       <BackToTop />
       <WhatsAppButton />
       <CursorBreeze />
+      <WelcomeModal />
     </>
   );
 }
